@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IdRes;
@@ -31,8 +32,16 @@ public class TaskActivity extends AppCompatActivity {
     private String date = "";
     private String id = "null";
 
+    //Открываем базу данных
+    final AppDatabase db = Room
+            .databaseBuilder(getApplicationContext(), AppDatabase.class, "project.db")
+            .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
+            .build();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
         Intent intent = getIntent();
@@ -65,6 +74,12 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO Here you can save all data from edit texts
+                EditText shortDescriptionEdit = findViewById(R.id.editTextShort);
+                String shortDescription = String.valueOf(shortDescriptionEdit.getText());
+                EditText decriptionEdit = findViewById(R.id.editTextFull);
+                String description = String.valueOf(decriptionEdit.getText());
+                db.tasksDao().insertAll(new Tasks(shortDescription, System.currentTimeMillis(), id));
+                db.taskInfoDao().insertAll(new taskInfo(description, id));
                 saveData(date);
             }
         });
@@ -78,6 +93,7 @@ public class TaskActivity extends AppCompatActivity {
                 ArrayList<String> newData = new ArrayList<>();
                 String checkName = String.valueOf(editText.getText());
                 //TODO Здесь нужно сохранить checkName в Базу Данных
+                db.checkDao().insertAll(new Check(checkName, 0, id));
                 newData.add(checkName); //TODO Remake Adapter to getting one String not ArrayList
                 index++;
                 adapter.addData(newData);
@@ -135,6 +151,7 @@ public class TaskActivity extends AppCompatActivity {
 
         public MyAdapter() {
             data = new ArrayList<>();
+
         }
 
 

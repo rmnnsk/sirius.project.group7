@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SiriusProject.iml" filepath="$PROJECT_DIR$/SiriusProject.iml" />
+      <module fileurl="file://D:\sirius.project.group7\SiriusProject.iml" filepath="D:\sirius.project.group7\SiriusProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\sirius.project.group7\app\app.iml" filepath="D:\sirius.project.group7\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sirius.project.group7.iml" filepath="$PROJECT_DIR$/sirius.project.group7.iml" />
     </modules>
   </component>
 </project>

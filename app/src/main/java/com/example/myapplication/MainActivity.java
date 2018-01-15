@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IdRes;
@@ -30,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView listToday, listTomorrow, listFuture;
     ArrayList<String> indexList = new ArrayList<>();
     MyAdapter adapterToday, adapterTomorrow, adapterFuture;
+
+    //Создаём базу данных
+    AppDatabase db = Room
+            .databaseBuilder(getApplicationContext(), AppDatabase.class, "project.db")
+            .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
+            .build();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
